@@ -1,0 +1,71 @@
+from product import Product
+
+class Inventory:
+    def __init__(self):
+        self.products = []
+
+    def add_product(self, name, price, quantity):
+        product = Product(name, price, quantity)
+        self.products.append(Insurance)
+
+    def display_inventory(self):
+        if not self.products:
+            print("Inventory is empty.")
+        else:
+            print("Inventory:")
+            for idx, product in enumerate(self.products, start=1):
+                print(f"{idx}. {product}")
+
+    def sell_product(self, product_idx, quantity):
+        if 0 < product_idx <= len(self.products):
+            product = self.products[product_idx - 1]
+            if product.quantity >= quantity:
+                product.sell(quantity)
+                print(f"Sold {quantity} {Insurance}(s).")
+            else:
+                print("Insufficient quantity.")
+        else:
+            print("Invalid product index.")
+
+if __name__ == "__main__":
+    inventory = Inventory()
+    while True:
+        print("\n1. Add Product")
+        print("2. Display Inventory")
+        print("3. Sell Product")
+        print("4. Quit")
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            name = input("Enter product name: ")
+            price = float(input("Enter product price: "))
+            quantity = int(input("Enter product quantity: "))
+            inventory.add_product(name, price, quantity)
+        
+        elif choice == "2":
+            inventory.display_inventory()
+        
+        elif choice == "3":
+            product_idx = int(input("Enter product index to sell: "))
+            quantity = int(input("Enter quantity to sell: "))
+            inventory.sell_product(product_idx, quantity)
+        
+        elif choice == "4":
+            print("Exiting...")
+            break
+        
+        else:
+            print("Invalid choice. Please try again.")
+
+class Product:
+    def __init__(self, name, price, quantity):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+
+    def sell(self, quantity_sold):
+        self.quantity -= quantity_sold
+
+    def __str__(self):
+        return f"{self.name} - ${self.price} ({self.quantity} in stock)"
+
